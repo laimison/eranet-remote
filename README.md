@@ -40,7 +40,7 @@ factory_reset
 
 ### Install OS to Raspberry Pi Zero
 
-The image used - 2018-11-13-raspbian-stretch-lite.img
+The image used `2018-11-13-raspbian-stretch-lite.img`
 
 Steps from Mac OS, but should be similar for any other OS
 
@@ -75,10 +75,16 @@ network={
 
 * Run the scripts
 
+```
+cd ~
+apt update && apt install git -y
+git clone https://github.com/laimison/eranet-remote.git
+cd eranet-remote
+```
+
 For the first time if you are in the local network or accessed through VPN, you can run `./streamer.sh your-machine-local-ip` and then try to watch the stream by opening network stream on VLC on udp://@:5004
 
 ```
-cd ~/remote
 ./streamer.sh
 ./install.sh
 ```

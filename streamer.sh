@@ -18,10 +18,5 @@ ip_streamer=`sudo nmap -sS --open -p 9999 192.168.2.0/24 | grep -e '^Nmap scan r
 if echo $? | grep ^0
 then
   echo "Enabling Unicast ..."
-  sleep 5
   curl "http://${ip_streamer}/dev/info.cgi?action=streaminfo&udp=n&rtp=y&multicast=n&unicast=y&mcastaddr=${ip_target}&port=5004"
-  
-  echo "Switching to HD quality ..."
-  sleep 5
-  curl "http://${ip_streamer}/dev/info.cgi?action=videoinfo&videoin_res=1920x1080_60P&videoin_frate=60&selvideoout_fhd=1&videoout_fhd=1&selvideoout_hd=1&videoout_hd=1&videoout_brate_fhd=15000&videoout_brate_hd=12000&videoout_brate_sd=1000"
 fi

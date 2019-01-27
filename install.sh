@@ -29,11 +29,13 @@ sudo systemctl status vncserver@1
 echo "export VISUAL=/usr/bin/vi" | sudo tee --append /root/.bashrc
 echo "export EDITOR=$VISUAL" | sudo tee --append /root/.bashrc
 
-sudo crontab -l > /tmp/crontab
-echo "*/1 * * * * /usr/bin/killall agetty" >> /tmp/crontab
-echo "*/1 * * * * /usr/bin/who | grep pts && " >> /tmp/crontab
-echo "*/1 * * * * /usr/bin/who | grep pts || " >> /tmp/crontab
-sudo crontab /tmp/crontab
+sudo crontab -l > /tmp/crontab.root
+echo "*/1 * * * * /usr/bin/killall agetty" >> /tmp/crontab.root
+sudo crontab /tmp/crontab.root
+
+crontab -l > /tmp/crontab.pi
+echo '*/1 * * * * $HOME/eranet-remote/quality.sh' >> /tmp/crontab.pi
+crontab /tmp/crontab.pi
 
 ln -sf ~/remote/vlc.sh ~/Desktop/vlc.sh
 
