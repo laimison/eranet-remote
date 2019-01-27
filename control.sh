@@ -153,6 +153,11 @@ do
       echo -ne "\x0\x`printf "%x\n" 4`\x0\x0" > /dev/hidg0
     ;;
 
+    "")
+      # Empty
+      echo "enter" | /home/pi/eranet-remote/hidgadget /dev/hidg1 keyboard
+    ;;
+
     *)
       # Keyboard
       echo "${input}" | /home/pi/eranet-remote/hidgadget /dev/hidg1 keyboard
