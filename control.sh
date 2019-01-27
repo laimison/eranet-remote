@@ -155,7 +155,7 @@ do
 
     *)
       # Keyboard
-      echo "${input}" | /home/pi/remote/hidgadget /dev/hidg1 keyboard
+      echo "${input}" | /home/pi/eranet-remote/hidgadget /dev/hidg1 keyboard
     ;;
   esac
 

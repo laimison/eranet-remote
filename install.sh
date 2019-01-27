@@ -13,7 +13,7 @@ colorscheme desert" >> ~/.vimrc
 # sudo systemctl daemon-reload
 
 sudo sed -i 's/exit 0//g' /etc/rc.local
-echo /home/pi/remote/hidenable.sh | sudo tee --append /etc/rc.local
+echo /home/pi/eranet-remote/hidenable.sh | sudo tee --append /etc/rc.local
 echo exit 0 | sudo tee --append /etc/rc.local
 
 gcc -o hidgadget hidgadget.c
