@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt update
-sudo apt install usbutils libusb-dev nmap vim git xfce4 xfce4-goodies tightvncserver -y
+sudo apt install usbutils libusb-dev nmap vim git xfce4 xfce4-goodies tightvncserver vlc -y
 
 echo "set mouse=
 syntax on
