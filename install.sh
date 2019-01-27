@@ -1,6 +1,11 @@
 #!/bin/bash
 
-apt install usbutils libusb-dev -y
+sudo apt update
+sudo apt install usbutils libusb-dev nmap vim git xfce4 xfce4-goodies tightvncserver -y
+
+echo "set mouse=
+syntax on
+colorscheme desert" >> ~/.vimrc
 
 # sudo systemctl enable serial-getty@ttyAMA0.service
 # sudo cp /lib/systemd/system/serial-getty@.service /etc/systemd/system/serial-getty@ttyAMA0.service
@@ -13,12 +18,11 @@ echo exit 0 | sudo tee --append /etc/rc.local
 
 gcc -o hidgadget hidgadget.c
 
-sudo apt install vim git -y
+echo "export VISUAL=/usr/bin/vi" | sudo tee --append /root/.bashrc | tee --append ~/.bashrc
+echo "export EDITOR=/usr/bin/vi" | sudo tee --append /root/.bashrc | tee --append ~/.bashrc
 
-sudo apt update
-sudo apt install xfce4 xfce4-goodies tightvncserver -y
-
-cp vlc.sh ~/Desktop/
+vncserver
+vncserver -kill :1
 
 sudo cp vncserver@.service /etc/systemd/system/
 sudo systemctl daemon-reload
@@ -26,19 +30,12 @@ sudo systemctl enable vncserver@1
 sudo systemctl start vncserver@1
 sudo systemctl status vncserver@1
 
-echo "export VISUAL=/usr/bin/vi" | sudo tee --append /root/.bashrc
-echo "export EDITOR=$VISUAL" | sudo tee --append /root/.bashrc
+ln -sf ~/eranet-remote/vlc.sh ~/Desktop/vlc.sh
 
-sudo crontab -l > /tmp/crontab.root
-echo "*/1 * * * * /usr/bin/killall agetty" >> /tmp/crontab.root
-sudo crontab /tmp/crontab.root
+# sudo crontab -l > /tmp/crontab.root
+# echo "*/1 * * * * /usr/bin/killall agetty" >> /tmp/crontab.root
+# sudo crontab /tmp/crontab.root
 
 crontab -l > /tmp/crontab.pi
 echo '*/1 * * * * $HOME/eranet-remote/quality.sh' >> /tmp/crontab.pi
 crontab /tmp/crontab.pi
-
-ln -sf ~/remote/vlc.sh ~/Desktop/vlc.sh
-
-echo "set mouse=
-syntax on
-colorscheme desert" >> ~/.vimrc

@@ -20,7 +20,7 @@ This is the solution to control computer remotely which includes keyboard, mouse
 
 ### Flash Lenkeng
 
-* Download IPTV and Encoder images from [https://drive.google.com/drive/folders/0B3mWuDyxrXyKSTZZZlRESlpBZmM?usp=sharing](https://drive.google.com/drive/folders/0B3mWuDyxrXyKSTZZZlRESlpBZmM?usp=sharing)
+* Download `IPTV_TX_PKG_v4_0_0_0_20160427.PKG` and `Encoder_20160407_0942.bin` images from [https://drive.google.com/drive/folders/0B3mWuDyxrXyKSTZZZlRESlpBZmM?usp=sharing](https://drive.google.com/drive/folders/0B3mWuDyxrXyKSTZZZlRESlpBZmM?usp=sharing)
 
 * You can flash it through http://lenkeng-ip
 
@@ -52,6 +52,9 @@ Steps from Mac OS, but should be similar for any other OS
 diskutil list
 sudo diskutil mountDisk /dev/disk1
 
+wifi_ssid=your_ssid
+wifi_password=your_password
+
 echo '
 dtoverlay=dwc2
 enable_uart=1' >> /Volumes/boot/config.txt
@@ -63,8 +66,8 @@ update_config=1
 country=US
 
 network={
-    ssid="Your SSID"
-    psk="Your Password"
+    ssid="$wifi_ssid"
+    psk="$wifi_password"
     key_mgmt=WPA-PSK
 }' > /Volumes/boot/wpa_supplicant.conf
 ```
@@ -77,9 +80,10 @@ network={
 
 ```
 cd ~
-apt update && apt install git -y
+sudo apt update && sudo apt install git -y
 git clone https://github.com/laimison/eranet-remote.git
 cd eranet-remote
+git config user.name laimison
 ```
 
 For the first time if you are in the local network or accessed through VPN, you can run `./streamer.sh your-machine-local-ip` and then try to watch the stream by opening network stream on VLC on udp://@:5004
