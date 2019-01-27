@@ -23,8 +23,10 @@ then
       curl "http://${ip_streamer}/dev/info.cgi?action=videoinfo&videoin_res=1920x1080_60P&videoin_frate=60&selvideoout_fhd=1&videoout_fhd=1&selvideoout_hd=1&videoout_hd=1&videoout_brate_fhd=15000&videoout_brate_hd=12000&videoout_brate_sd=1000"
     fi
   else
-    if date +%M | grep ^00
+    if curl "http://${ip_streamer}" | grep input | grep videoout_fhd | grep -q 'value="2"'
     then
+      echo "SD quality already enabled"
+    else
       echo "Switching to SD quality and low frame rate ..."
       curl "http://${ip_streamer}/dev/info.cgi?action=videoinfo&videoin_res=1920x1080_60P&videoin_frate=2&selvideoout_fhd=2&videoout_fhd=2&selvideoout_hd=2&videoout_hd=2&videoout_brate_fhd=15000&videoout_brate_hd=12000&videoout_brate_sd=1000"
     fi

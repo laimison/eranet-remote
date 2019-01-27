@@ -37,5 +37,5 @@ ln -sf ~/eranet-remote/vlc.sh ~/Desktop/vlc.sh
 # sudo crontab /tmp/crontab.root
 
 crontab -l > /tmp/crontab.pi
-echo '*/1 * * * * $HOME/eranet-remote/quality.sh' >> /tmp/crontab.pi
+echo '*/3 * * * * $HOME/eranet-remote/quality.sh >> /tmp/quality.log 2>&1' >> /tmp/crontab.pi
 crontab /tmp/crontab.pi
