@@ -55,7 +55,7 @@ sudo diskutil mountDisk /dev/disk1
 wifi_ssid=your_ssid
 wifi_password=your_password
 
-echo '
+echo "
 dtoverlay=dwc2
 enable_uart=1' >> /Volumes/boot/config.txt
 
@@ -66,10 +66,10 @@ update_config=1
 country=US
 
 network={
-    ssid="$wifi_ssid"
-    psk="$wifi_password"
+    ssid=\"$wifi_ssid\"
+    psk=\"$wifi_password\"
     key_mgmt=WPA-PSK
-}' > /Volumes/boot/wpa_supplicant.conf
+}" > /Volumes/boot/wpa_supplicant.conf
 ```
 
 * Insert SD to Raspberry Pi Zero
