@@ -42,4 +42,4 @@ crontab /tmp/crontab.pi
 
 grep 'cd ~/eranet-remote && ./control.sh' ~/.bashrc || echo 'echo "cd ~/eranet-remote && ./control.sh"' >> ~/.bashrc
 
-> /etc/motd
+printf '' | sudo tee /etc/motd
