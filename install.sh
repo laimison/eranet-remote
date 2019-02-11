@@ -41,3 +41,5 @@ echo '*/3 * * * * $HOME/eranet-remote/quality.sh >> /tmp/quality.log 2>&1' >> /t
 crontab /tmp/crontab.pi
 
 grep 'cd ~/eranet-remote && ./control.sh' ~/.bashrc || echo 'echo "cd ~/eranet-remote && ./control.sh"' >> ~/.bashrc
+
+> /etc/motd
