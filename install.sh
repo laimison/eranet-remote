@@ -39,3 +39,5 @@ ln -sf ~/eranet-remote/vlc.sh ~/Desktop/vlc.sh
 crontab -l > /tmp/crontab.pi
 echo '*/3 * * * * $HOME/eranet-remote/quality.sh >> /tmp/quality.log 2>&1' >> /tmp/crontab.pi
 crontab /tmp/crontab.pi
+
+grep 'cd ~/eranet-remote && ./control.sh' ~/.bashrc || echo 'echo "cd ~/eranet-remote && ./control.sh"' >> ~/.bashrc
