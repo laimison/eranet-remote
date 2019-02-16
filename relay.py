@@ -4,16 +4,33 @@ import RPi.GPIO as GPIO
 import time
 import sys
 
-GPIO.setmode(GPIO.BCM)
+print "Usage is ./relay.py <channel> <seconds>"
 
+GPIO.setmode(GPIO.BCM)
 # GPIO.setmode(GPIO.BOARD)
 
-pinList = [2, 3, 4, 17, 27, 22, 10, 9]
+channel = int(sys.argv[1])
+seconds = int(sys.argv[2])
 
-mypin = int(sys.argv[1])
+ch = channel
 
-GPIO.setup(mypin,GPIO.OUT)
-GPIO.output(mypin, False)
-time.sleep(1);
-GPIO.output(mypin, True)
+if channel == 1:
+  ch = 2
+
+if channel == 2:
+  ch = 3
+
+if channel == 3:
+  ch = 17
+
+if channel == 4:
+  ch = 27
+
+print channel
+print seconds
+
+GPIO.setup(ch,GPIO.OUT)
+GPIO.output(ch, False)
+time.sleep(seconds);
+GPIO.output(ch, True)
 GPIO.cleanup()

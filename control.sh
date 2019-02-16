@@ -11,7 +11,7 @@ Mouse:
 lc rc drag su sd    u1 u2 u3 u4    d1 d2 d3 d4    r1 r2 r3 r4    l1 l2 l3 l4
 
 Relay:
-power1 power30 hdmi300"
+power1 power30 hdmi600"
 }
 
 print_help
@@ -163,17 +163,17 @@ do
 
     power1)
       # Power button for 1 sec
-      ./relay-power-button.py &
+      ./relay.py 1 1 &
     ;;
 
     power30)
       # Power button for 30 seconds
-      ./relay-power-button-long.py &
+      ./relay.py 1 30 &
     ;;
 
-    hdmi300)
-      # HDMI turned on for 300 seconds
-      ./hdmi300.py &
+    hdmi600)
+      # HDMI turned on for 600 seconds
+      ./relay.py 2 600 &
     ;;
 
     *)
