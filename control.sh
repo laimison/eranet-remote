@@ -3,15 +3,28 @@
 # decimal and hexadecimal table - https://www.ibm.com/support/knowledgecenter/en/ssw_aix_71/com.ibm.aix.networkcomm/conversion_table.htm
 
 print_help () {
-  echo "Keyboard:
+echo "Video:
+An example to send stream from 192.168.2.104 (video sender) to 192.168.2.100 (VLC receiver - possible public IP):
+http://192.168.2.104/dev/info.cgi?action=streaminfo&udp=n&rtp=y&multicast=n&unicast=y&mcastaddr=192.168.2.100&port=5004
+user: admin, password: 123456
+
+See video -> open VLC app - open network stream
+udp://@:5004
+
+If you want to change the quality to SD, HD or Full HD:
+http://192.168.2.104/dev/info.cgi?action=videoinfo&videoin_res=1920x1080_60P&videoin_frate=60&selvideoout_fhd=2&videoout_hd=2&videoout_fhd=2&selvideoout_hd=2&videoout_brate_fhd=15000&videoout_brate_hd=12000&videoout_brate_sd=1000
+http://192.168.2.104/dev/info.cgi?action=videoinfo&videoin_res=1920x1080_60P&videoin_frate=60&selvideoout_fhd=1&videoout_hd=1&videoout_fhd=1&selvideoout_hd=1&videoout_brate_fhd=15000&videoout_brate_hd=12000&videoout_brate_sd=1000
+http://192.168.2.104/dev/info.cgi?action=videoinfo&videoin_res=1920x1080_60P&videoin_frate=60&selvideoout_fhd=0&videoout_hd=0&videoout_fhd=0&selvideoout_hd=0&videoout_brate_fhd=15000&videoout_brate_hd=12000&videoout_brate_sd=1000
+
+Keyboard:
 left-ctrl left-shift left-alt left-meta    return enter esc backspace tab    f1 pgup pgdown delete    right left up down    numlock capslock scrolllock
 space minus dash equal lbracket rbracket backslash hash semicolon quote backquote tilde comma period slash
 
 Mouse:
 lc rc drag su sd    u1 u2 u3 u4    d1 d2 d3 d4    r1 r2 r3 r4    l1 l2 l3 l4
 
-Relay:
-power1 power30 hdmi600"
+Relay (power on for 1 second, power on for 30 seconds, turn on HDMI unit for 1 hour):
+power1 power30 hdmi3600"
 }
 
 print_help
@@ -163,17 +176,17 @@ do
 
     power1)
       # Power button for 1 sec
-      ./relay.py 1 1 &
+      /home/pi/eranet-remote/relay.py 1 1 &
     ;;
 
     power30)
       # Power button for 30 seconds
-      ./relay.py 1 30 &
+      /home/pi/eranet-remote/relay.py 1 30 &
     ;;
 
-    hdmi600)
+    hdmi3600)
       # HDMI turned on for 600 seconds
-      ./relay.py 2 600 &
+      /home/pi/eranet-remote/relay.py 2 3600 &
     ;;
 
     *)

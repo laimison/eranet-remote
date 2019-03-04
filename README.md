@@ -16,6 +16,8 @@ This is the solution to control computer remotely which includes keyboard, mouse
 
 * RJ45 cable
 
+* HDMI cable
+
 ## Flashing
 
 ### Flash Lenkeng
@@ -76,7 +78,7 @@ network={
 
 * `ssh pi@raspberry-ip` where username is pi and password is raspberry
 
-* Run the scripts
+* Run the scripts on Raspberry
 
 ```
 cd ~
@@ -84,13 +86,22 @@ sudo apt update && sudo apt install git -y
 git clone https://github.com/laimison/eranet-remote.git
 cd eranet-remote
 git config user.name laimison
-```
-
-For the first time if you are in the local network or accessed through VPN, you can run `./streamer.sh your-machine-local-ip` and then try to watch the stream by opening network stream on VLC on udp://@:5004
-
-```
-./streamer.sh
 ./install.sh
 ```
 
-If you ran just `./streamer.sh`, the stream should be available through VNC at vnc://raspberry-ip:5901 , click VLC.sh on Desktop
+Use keyboard, power button and setup video stream, please run:
+
+```
+cd ~/eranet-remote && ./control.sh
+```
+
+## Troubleshooting
+
+### Check whether you are receiving video stream
+
+On Raspberry
+
+```
+sudo tcpdump -i wlan0 port 5004
+```
+
