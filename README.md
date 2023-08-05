@@ -40,7 +40,7 @@ Device that allows to watch and control another computer over the network. It ac
 
 ![HDMI to CSI](images/hdmi-to-csi.jpg)
 
-Tip: you leave power button wired on your computer as is and connect this device in parallel so both - physical power button and button controlled through relay work well together
+Tip: you can leave power button wired on your computer as found. This can be achieved by connecting cable from relay to an existing Power SW cable. So both - physical power button and button controlled through relay work well together.
 
 ### Install Raspberry Pi OS
 
