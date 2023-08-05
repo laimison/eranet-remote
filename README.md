@@ -1,107 +1,61 @@
 # eraNET Remote
 
-This is the solution to control computer remotely which includes keyboard, mouse and screen access.
+Device that allows to watch and control another computer over the network. It acts as remote monitor, keyboard and mouse. The project was redesigned three times during years to reduce complexity so now it is most simplest version of it which does the job.
 
 ## Prerequisites
 
 ### Equipment
 
-* Lenkeng LKV373A V3.0 Sender [https://www.ebay.co.uk/itm/LKV373A-HDMI-Network-Extender-Transmitter-1080P-to-120M-Over-RJ45-Cat6-Cable-3D/263202502448?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649](https://www.ebay.co.uk/itm/LKV373A-HDMI-Network-Extender-Transmitter-1080P-to-120M-Over-RJ45-Cat6-Cable-3D/263202502448?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649)
+* Pi Zero W and its Micro USB charging cable
 
-* Raspberry Pi Zero W [https://www.ebay.co.uk/itm/NEW-Raspberry-Pi-Zero-Pi0-W-WiFi-Wireless-Bluetooh-1-Ghz-512MB-Micro-Computer-UK/132912804616?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649](https://www.ebay.co.uk/itm/NEW-Raspberry-Pi-Zero-Pi0-W-WiFi-Wireless-Bluetooh-1-Ghz-512MB-Micro-Computer-UK/132912804616?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649)
+* Geekworm or Waveshare HDMI to CSI Adaptor CSI-2 C790 (they all should have a chip TC358743XBG or shorter name is TC358743)
 
-* 8 GB SD card
+* 4 Channel 3.3V/5V 10A Relay Module for Arduino RPi ESP8266 (any relay is fine as long as it keeps circut open during its power outage)
 
-* 2 x USB to USB micro cables
+* PortaPow USB power blocker - data only, no charging
 
-* RJ45 cable
+* HDMI to HDMI cable
 
-* HDMI cable
+* Micro USB to USB cable (only one cable is enough to cover mouse and keyboard)
 
-## Flashing
+* 2 core cable (used from relay to Power SW)
 
-### Flash Lenkeng
+* 4 GB SD card
 
-* Download `IPTV_TX_PKG_v4_0_0_0_20160427.PKG` and `Encoder_20160407_0942.bin` images from [https://drive.google.com/drive/folders/0B3mWuDyxrXyKSTZZZlRESlpBZmM?usp=sharing](https://drive.google.com/drive/folders/0B3mWuDyxrXyKSTZZZlRESlpBZmM?usp=sharing)
+### Demo
 
-* You can flash it through http://lenkeng-ip
+![Camera 1](images/camera1.png)
 
-* The username is admin and password 123456
+![Camera 2](images/camera2.png)
 
-* If you are not able to access, you can do a factory reset
-
-```
-nc lenkeng-ip 9999
-list
-factory_reset
-```
-
-* You can uncheck multicast through web GUI, to not flood all devices on your LAN with multicast
+![Camera 3](images/camera3.png)
 
 ## Installation
 
-### Install OS to Raspberry Pi Zero
+### Prepare device physically
 
-The image used `2018-11-13-raspbian-stretch-lite.img`
+![Pi-Zero-W](images/pi-zero-w.jpg)
 
-Steps from Mac OS, but should be similar for any other OS
+![relay](images/relay.jpg)
 
-* Install OS to SD card (I used Etcher app)
+![HDMI to CSI](images/hdmi-to-csi.jpg)
 
-* When the image is flashed successfully, modify Raspbian configuration files:
+Tip: you leave power button wired on your computer as is and connect this device in parallel so both - physical power button and button controlled through relay work well together
 
-```
-diskutil list
-sudo diskutil mountDisk /dev/disk1
+### Install Raspberry Pi OS
 
-wifi_ssid=your_ssid
-wifi_password=your_password
+Raspberry Pi Imager v1.7.3 -> Raspberry Pi OS Lite (32bit) with no desktop 0.4G (tested image was 2023-05-03, but latest available can be tried too)
 
-echo "
-dtoverlay=dwc2
-enable_uart=1' >> /Volumes/boot/config.txt
+Don't forget to enable SSH, set WiFi SSID and password to connect your Pi Zero to WiFI, also keyboard layout should be US
 
-touch /Volumes/boot/ssh
-
-echo 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=US
-
-network={
-    ssid=\"$wifi_ssid\"
-    psk=\"$wifi_password\"
-    key_mgmt=WPA-PSK
-}" > /Volumes/boot/wpa_supplicant.conf
-```
-
-* Insert SD to Raspberry Pi Zero
-
-* `ssh pi@raspberry-ip` where username is pi and password is raspberry
-
-* Run the scripts on Raspberry
+### Setup
 
 ```
-cd ~
-sudo apt update && sudo apt install git -y
+ssh pi@your_raspberry_pi
+sudo su -
 git clone https://github.com/laimison/eranet-remote.git
 cd eranet-remote
-git config user.name laimison
-./install.sh
 ```
 
-Use keyboard, power button and setup video stream, please run:
-
-```
-cd ~/eranet-remote && ./control.sh
-```
-
-## Troubleshooting
-
-### Check whether you are receiving video stream
-
-On Raspberry
-
-```
-sudo tcpdump -i wlan0 port 5004
-```
+Now you can run scripts in the order they are placed, they contain more information as you go.
 
